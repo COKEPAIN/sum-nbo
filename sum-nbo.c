@@ -6,7 +6,8 @@ int main(int argc, char * argv[]) {
   FILE * fp = NULL;
   size_t red = 0;
   char buf[4] = {0};
-  int * num = 0;
+  uint32_t * num = 0;
+  int sum = 0;
 
   for (; argc-1>0; argc--) {
     // printf("argc = %d!\n", argc);
@@ -25,9 +26,14 @@ int main(int argc, char * argv[]) {
       uint32_t num1 = *num;
       // printf("%u\n", num1);
       uint32_t num2 = htonl(num1);
-      printf("%d(0x%08x)", num1, num2);
+      printf("%d(0x%08x)", num2, num2);
+      sum += num2;
     } else {
       // printf("fread_s BAD!\n");
     }
+    if ( argc-1 != 1 ) {
+      printf(" + ");
+    }
   }
+  printf(" = %d(0x%08x)", sum, sum);
 }
